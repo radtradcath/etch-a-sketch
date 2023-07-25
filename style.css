@@ -1,0 +1,15 @@
+#grid-container,
+.box-child {
+    border-width: thin;
+    border-color: red;
+    border-style: solid;
+}
+
+#grid-container {
+    display: flex;   
+}
+
+.box-child {
+    width: 30px;
+    height: 30px;
+}
