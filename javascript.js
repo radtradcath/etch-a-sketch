@@ -12,7 +12,6 @@ let userSize;
 createContainers(numContainer, numBox); //Set initial grid;
 
 
-
 function createContainers(numContainer, numBox) {   //
     for (i = 0; i < numContainer; i++) {            //
         container = document.createElement('div');  //
@@ -29,13 +28,24 @@ function createContainers(numContainer, numBox) {   //
     }
     const boxChilds = document.querySelectorAll('.box-child');
 
-    boxChilds.forEach((box) => box.addEventListener('mouseenter', () => { //For each box of nodelist, change background color when hovered;
-        box.setAttribute('style', `background-color: rgb(${randomizeColour()});`);
-    }));
+    btnRainbow.addEventListener('click', () => {
+        boxChilds.forEach((box) => box.setAttribute('style', 'background-color: white;'));
+        boxChilds.forEach((box) => box.addEventListener('mouseenter', () => { //For each box of nodelist, change background color when hovered;
+            box.setAttribute('style', `background-color: rgb(${randomizeColor()});`);
+        }))})
+    
+
+    btnGrey.addEventListener('click', () => {
+        boxChilds.forEach((box) => box.setAttribute('style', 'background-color: white;'));
+        boxChilds.forEach((box) => box.addEventListener('mouseenter', () => { //For each box of nodelist, change background color when hovered;
+            box.setAttribute('style', `background-color: rgb(${grayScaleColor()});`);
+        }))})
+    
+    
 }
 
 
-function randomizeColour() {    //Randomize rgb(rrr,ggg,bbb) for rainbow effect;
+function randomizeColor() {    //Randomize rgb(rrr,ggg,bbb) for rainbow effect;
     let rgbArray = [];
 
     for(i = 0; i < 3; i++){
@@ -43,7 +53,20 @@ function randomizeColour() {    //Randomize rgb(rrr,ggg,bbb) for rainbow effect;
         rgbArray.push(randomNumber);
     }       
     
-     console.log(rgbArray);
+     return rgbArray.toString();
+};
+
+
+let rgbArray = [200, 200, 200];
+function grayScaleColor() {    //Set rgb(rrr,ggg,bbb) for gray scale;
+    rgbArray[0] -= 20;
+    rgbArray[1] -= 20; 
+    rgbArray[2] -= 20;
+    
+    if (rgbArray[0] < 0) {
+        rgbArray =[200, 200, 200];
+    }
+    
      return rgbArray.toString();
 };
 
@@ -56,15 +79,15 @@ function removeAllChildNodes(parent) {      //Declare a function to erase contai
 
 
 btnChangeGridSize.addEventListener('click', () => {                //OnClick: If user inputs correctly,remove all existing nodes,
-    userSize = Number(prompt('What is the size of the box?'));     //create new ones with the desirable size;
+    userSize = Number(prompt('What is the size of the box?'));
+    console.log(userSize);     //create new ones with the desirable size;
     console.log(typeof userSize);
-    if (typeof userSize === 'number' && userSize < 100) {
+    if (!isNaN(userSize) && userSize < 100) {
         removeAllChildNodes(container);
         removeAllChildNodes(gridContainer);
         createContainers(userSize, userSize);
         
     } else {
-    return alert('Input a valid number of less than 100.');
+        alert('Input a valid number of less than 100.')
     }
 });
-

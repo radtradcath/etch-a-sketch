@@ -1,3 +1,13 @@
+body {
+    display: flex;
+    background-color: gray;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 12px;
+}
+
+
 #grid-container,
 .box-child {
     border-width: thin;
@@ -8,7 +18,8 @@
 #grid-container {
     width: 900px;
     height: 900px;;
-    display: flex;   
+    display: flex;
+    
 }
 
 .box-container {
